@@ -15,7 +15,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles/home.css">
     
-    <title>Blog entry title (template)</title>
+    <title>Flask Static Blog</title>
     
 </head>
 <body>
@@ -27,19 +27,48 @@
             
         <div class="content">
             
-    <h1>Blog entry title (template)</h1>
-    <p>This is a paragraph</p>
-<p>This is also a paragraph Sit incididunt et exercitation esse voluptate eu sint dolore est deserunt esse. Consequat fugiat labore dolore ut excepteur dolore fugiat ex fugiat commodo irure. Labore amet adipisicing ea est ad nulla anim reprehenderit. Velit cupidatat aute amet consectetur commodo do incididunt dolor sunt nostrud ipsum reprehenderit.</p>
-<p>Ea anim veniam dolor occaecat duis enim consectetur reprehenderit qui enim occaecat excepteur deserunt. Sunt incididunt officia exercitation velit voluptate voluptate veniam adipisicing. Tempor labore irure deserunt commodo culpa anim. Aute aliqua dolor officia amet nulla mollit. Cupidatat reprehenderit ad quis esse exercitation cillum eu. Lorem nulla minim ut adipisicing.</p>
-<p>Tempor eiusmod reprehenderit fugiat nulla consectetur nulla ex Lorem laboris qui esse. Duis occaecat do est proident cupidatat duis culpa ea nulla. Cillum ea ullamco voluptate consectetur officia qui ex. Est duis dolore cupidatat nostrud. Irure cillum proident amet non id do. Cupidatat in enim magna anim consequat dolore voluptate in irure aliquip cupidatat magna laboris laboris. Dolor mollit laborum sint ea cillum.</p>
+    <h1>Flask Static Blog</h1>
+    <h1>Why flask?</h1>
+<p>To mark the start of this blog I thought it might be a good idea to explain how I got to this point.  I wanted to be able to launch a blog quickly in the most simply way that I could without using any of the usual tools like wordpress of blogger.  After doing some research I came across <code>flask_flatpages</code> and <code>flask_frozen</code> and set to work.</p>
+<p><code>flask_flatpages</code> allows us to write our blog posts in .md files, allowing us to focus on the content rather than html tags, while</p>
 <ul>
-<li>Bullet point 1</li>
-<li>Bullet point 2</li>
-<li>Bullet point 3</li>
+<li>Setting up the Flask application</li>
+<li>Using flask_flatpages to generate our blog posts</li>
+<li>Using flask_frozen to generate static html files</li>
+<li>Deploying using git</li>
+<li>Hosting on github.io</li>
+<li>Setting up a custom domain (i used godaddy.com)</li>
+<li>Registering the site with <a href="https://analytics.google.com/analytics/web/">Google Analytics</a></li>
 </ul>
-<p><img src="http://www.google.com.au/images/nav_logo7.png"></p>
-<p><a href="http://twitter.com/arrantate">Hyperlink</a></p>
-    <span class="author"><strong><a href="">Arran Tate</a></strong> 10 Jun 20</span>
+<h1>Setting up the flask application</h1>
+<p>As always I start with setting up a new virtual environment for my project</p>
+<pre><code>cd projects
+mkdir blog
+cd blog
+virtualenv -p python3 venv
+source venv/bin/activate
+</code></pre>
+<p>Followed by installing the dependencies that I know I'll need using <code>pip install</code></p>
+<pre><code>pip install flask flask_flatpages flask_frozen
+</code></pre>
+<p>That's it.  Now we have everything we need to get started.</p>
+<p>Now in a new file <code>app.py</code> we need some boilerplate flask code.  Mine is slightly different to the one on the flask quickstart guide but I'll explain why.</p>
+<pre><code>from flask import Flask
+
+app = Flask(__name__)
+
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
+</code></pre>
+<p>The <code>if __name__ == "__main__":</code> statement is there to allow us to easily run the development server from the console using the command <code>python app.py</code>.  It's not essential but it just makes life easier.  And since we are going to be generating a static site using this flask app, we dont need to worry about having debug set to true as we will not be deplying the flask app it's self.</p>
+<p>So to test that this works just start up the development server with <code>python run.py</code> and open the url that is given to us in the console, something like http://127.0.0.1:5000/. We should see a blank webpage with just the words "Hello, World!" at the top.  If we do, everything worked and we have a working flask app.  But it doesn't do much yet, so let's get to the meaty bits.</p>
+<p>more coming soon...</p>
+    <span class="author"><strong><a href="">Arran Tate</a></strong> 19 Jun 20</span>
 
         </div>
     </div>
