@@ -50,13 +50,13 @@ hr {
 }
 
 a:link {
-  color: yellow;
+  color: rgb(96, 138, 177);
   background-color: transparent;
   text-decoration: none;
 }
 
 a:visited {
-  color: rgba(255, 255, 0, 0.719);
+  color: rgb(96, 138, 177);
   background-color: transparent;
   text-decoration: none;
 }
@@ -68,8 +68,19 @@ a:hover {
 }
 
 a:active {
-  color: yellow;
+  color: rgb(96, 138, 177);
   background-color: transparent;
   text-decoration: underline;
 }
 
+pre code {
+    background-color: rgba(36, 36, 36, 0.384);
+    border: 1px solid rgb(0, 0, 0);
+    display: block;
+    padding: 20px;
+    color: whitesmoke;
+  }
+
+code {
+    color: rgb(179, 179, 0);
+  }

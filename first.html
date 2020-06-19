@@ -11,6 +11,7 @@
     gtag('config', 'UA-169958782-1');
     </script>
 
+    
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/static/styles/home.css">
@@ -35,10 +36,10 @@
 <li>Setting up the Flask application</li>
 <li>Using flask_flatpages to generate our blog posts</li>
 <li>Using flask_frozen to generate static html files</li>
+<li>Hosting on <a href="https://github.io/" target="_blank">github.io</a></li>
 <li>Deploying using git</li>
-<li>Hosting on github.io</li>
-<li>Setting up a custom domain (i used godaddy.com)</li>
-<li>Registering the site with <a href="https://analytics.google.com/analytics/web/">Google Analytics</a></li>
+<li>Setting up a custom domain</li>
+<li>Registering the site with <a href="https://analytics.google.com/analytics/web/" target="_blank">Google Analytics</a></li>
 </ul>
 <h1>Setting up the flask application</h1>
 <p>As always I start with setting up a new virtual environment for my project</p>
@@ -53,7 +54,9 @@ source venv/bin/activate
 </code></pre>
 <p>That's it.  Now we have everything we need to get started.</p>
 <p>Now in a new file <code>app.py</code> we need some boilerplate flask code.  Mine is slightly different to the one on the flask quickstart guide but I'll explain why.</p>
-<pre><code>from flask import Flask
+<pre><code>from flask import Flask, render_template, url_for
+from flask_flatpages import FlatPages
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -66,8 +69,147 @@ if __name__ == "__main__":
     app.run(debug=True)
 </code></pre>
 <p>The <code>if __name__ == "__main__":</code> statement is there to allow us to easily run the development server from the console using the command <code>python app.py</code>.  It's not essential but it just makes life easier.  And since we are going to be generating a static site using this flask app, we dont need to worry about having debug set to true as we will not be deplying the flask app it's self.</p>
-<p>So to test that this works just start up the development server with <code>python run.py</code> and open the url that is given to us in the console, something like http://127.0.0.1:5000/. We should see a blank webpage with just the words "Hello, World!" at the top.  If we do, everything worked and we have a working flask app.  But it doesn't do much yet, so let's get to the meaty bits.</p>
-<p>more coming soon...</p>
+<p>So to test that this works just start up the development server with <code>python run.py</code> and open the url that is given to us in the console, something like <code>http://127.0.0.1:5000/</code>. We should see a blank webpage with just the words "Hello, World!" at the top.  If we do, everything worked and we have a working flask app.  But it doesn't do much yet, so let's get to the meaty bits.</p>
+<h1>Using flask_flatpages to generate our blog posts</h1>
+<p>Writing out posts is going to be a lot easier if we write each blog post in a .md file. The job of <code>flask_flatpages</code> is to take these <code>.md</code> files and essentially tell flask to serve them in the browser as <code>.html</code>.  </p>
+<p>To start we need to tell <code>flask_flatpages</code> to look for files with the extension <code>.md</code>.  By default it will look for these in <code>/pages/</code> directory. We're okay with that so we will leave it as is.  However also by default it will be looking for <code>.html</code> files instead of <code>.md</code>.  So let's add some configuration and instantiate a <code>FlatPages()</code> class, passing in our <code>app</code> instance.  (also don't forget to import Flatpages).  </p>
+<pre><code>from flask import Flask, render_template, url_for
+from flask_flatpages import FlatPages
+from datetime import datetime
+
+app = Flask(__name__)
+app.config['FLATPAGES_EXTENSION'] = '.md'
+
+pages = FlatPages(app)
+</code></pre>
+<p>To keep thing simple we'll delete the route in our flask app and add our own.  We will add another route later to serve as a home page but for now we just want to deal with our blog posts. We do this by replacing the route we already have with the following:</p>
+<pre><code>@app.route('/&lt;path:path&gt;.html')
+def page(path):
+    page = pages.get_or_404(path)
+    return render_template('page.html', page=page)
+</code></pre>
+<p>This route searches for a file in our <code>pages/</code> directory and if it exists, serves it to our browser as <code>.html</code>.  If it doesn't exist it will return a 404 error. So for example if we try to follow <code>http://127.0.0.1:5000/blogpost.html</code>, the route will look for a file called <code>blogpost.md</code> in the pages directory.  </p>
+<p>This is useful because it means that we can just put all of our blog posts into the <code>pages/</code> directory and our flask app will be able to serve them up as and when we need, without us having to explicitely add all of the individual URLs to our app.</p>
+<p>Now to see the content of our pages we need to set up a couple of html files.  Anyone who has used flask to build a web app before will be aware that we do this by using templates.  So let's make a new directory called <code>templates</code> and add <code>templates.html</code>.  This template will dictate how the whole website looks, along with it's accompanying .css file, but setting up that is a whole other guide. all we need to know now is that wherever in our <code>templates.html</code> file we want to show the blog post content we should simply add:</p>
+<pre><code>{% block content %}
+{% endblock %}
+</code></pre>
+<p>After that it's as simple as creating another html file that will contain just the content of our blog post.  We'll call this <code>page.html</code> and it will contain the following:</p>
+<pre><code>{% extends "template.html" %}
+{% block content %}
+    &lt;h1&gt;{{ page.title }}&lt;/h1&gt;
+    &lt;p&gt;{{ page.html|safe }}&lt;p&gt;
+    &lt;strong&gt;{{ page.author }}&lt;/strong&gt; {{ page.date }}&lt;/span&gt;
+{% endblock %}
+</code></pre>
+<p>The bits of code in the curly brackets will be substituted with the meta data from the top of our .md files thanks to jinja (an engine used by flask). We can grab these variables because we passed our page into the template in our route earlier with <code>page=page</code>.  We define our meta variables at the top of our <code>.md</code> file very easily like so (remembering to leave a 2 line gap between the meta and content)</p>
+<pre><code>title: Post title goes here
+date: 19 Jun 20
+author: Me! :)
+description: This is a summary of the post
+
+
+# This is th start of my content!
+</code></pre>
+<p>Hopefully that should be it!</p>
+<p>All we are missing now is a home page which contains a list of our blog posts. We will want to display these posts in reverse order by date, so we can see the most recent first.  We do this by using a lambda function, which can be quite tricky to understand so here's a <a href="https://www.w3schools.com/python/python_lambda.asp" target="_blank">link to how it works</a>.  But all we need to know for now is that it does work!  That being said, let's add a new route to the app.</p>
+<pre><code>@app.route('/')
+def index():
+    posts = [p for p in pages if "date" in p.meta]
+    sorted_pages=sorted(posts, reverse=True, key=lambda page: datetime.strptime(page.meta["date"], "%d %b %y"))
+    return render_template('bloghome.html', pages=sorted_pages)
+</code></pre>
+<p>Change the <code>"%d %b %y"</code> to reflect your preferred way of writing the date in your blog post meta data.  More information on this formatting can be found <a href="https://www.w3schools.com/python/python_datetime.asp" target="_blank">here</a>.</p>
+<p>We need a <code>bloghome.html</code> in our templates folder now which we can use to display our list of blog entries.  In this file we'll use a for loop to iterate over each of our pages like this:</p>
+<pre><code>{% extends "template.html" %}
+{% block content %}
+    {% for page in pages %}
+    &lt;a href="{{ page.path }}.html"&gt;&lt;h2&gt;{{ page.title }}&lt;/h2&gt;&lt;/a&gt;
+    &lt;p&gt;{{ page.description }}&lt;/p&gt;
+    &lt;p&gt;{{ page.date }}&lt;/p&gt;
+    &lt;hr&gt;
+    {% endfor %}
+{% endblock %}
+</code></pre>
+<p>Simple as that.  You should now be able to navigate from your blog homepage to the blog posts.  If you want to add a link back to the homepage make sure you add it in <code>template.html</code> so it appears in all of your pages.</p>
+<h1>Using flask_frozen to generate static html files</h1>
+<p>The hard stuff is out of the way now, all this next part does is to freeze our website to <code>.html</code> files, making it much easier to deploy.  In the interest of simplicity we'll impliment this functionality in a new file, <code>freeze.py</code> with the following code:</p>
+<pre><code>from flask_frozen import Freezer
+from flask import url_for
+from app import app, pages
+
+
+app.config['FREEZER_DESTINATION_IGNORE'] = ['.git*', 'CNAME']
+freezer = Freezer(app)
+
+@freezer.register_generator
+def pagelist():
+    for page in pages:
+        print(f"making page for {page.path}")
+        yield url_for('page', path=page.path)
+
+if __name__ == "__main__":
+    freezer.freeze()
+</code></pre>
+<p>Notice the app config here. At this stage we dont actually need this line, but it comes in handy later on when we want to add more posts and push them to our github repo. Whenever we freeze by default the created files will be written to a new directory called <code>/build/</code>. In doing this anything in the build folder will be deleted first. The CNAME is a file required later for our custom URL, and the .git* allows us to use this as our origin.  This config simply tells flask_frozen to ignore these files, and to not delete them.</p>
+<p>All there is to do now is to run freeze.py in the terminal with:</p>
+<pre><code>python freeze.py
+</code></pre>
+<p>Simple! Now we should have all of our required files in the <code>/build/</code> directory.</p>
+<p>It is important to note though that if you open the newly created files in the browser the links back to the root won't work properly.  But that is because they are doing just that, linking to <code>/</code>.  Once these files are uploaded to the root folder of your host (i am using <a href="https://github.io/" target="_blank">github.io</a>) the links should work corrently.</p>
+<h1>Hosting on github.io</h1>
+<p>This is super simple.  If you don't have a github account create one, and make a new repository.  Name your repository the following:</p>
+<pre><code>&lt;your github username&gt;.github.io
+</code></pre>
+<p>make sure you don't include the <code>README.md</code>. We want our webpage to load first instead of this.</p>
+<p>That's it!  Nothing more to say.</p>
+<h1>Deploying using git</h1>
+<p>Again, another super simple step.  I won't teach people how to suck eggs so here are the commands I used to add the files to my github repo.</p>
+<pre><code>cd &lt;build directory&gt;
+git init
+git remote add origin &lt;repository url&gt;
+git add .
+git commit -m "First commit"
+git push origin master
+</code></pre>
+<p>If all has gone well you should be able to see your new blog by following the link:</p>
+<pre><code>http://&lt;your github username&gt;.github.io
+</code></pre>
+<p>From now on if you add a blog post to your project, all you need to do from your app directory is:</p>
+<pre><code>python freeze.py
+cd build/
+git add .
+git commit -m "commit comment"
+git push origin master
+</code></pre>
+<p>One day we could work on automating this step but for now we have the functionality!</p>
+<p>The rest of this blog is optional, but for registering a custom domain and setting up Google Analytics, read further.</p>
+<h1>Setting up a costum domain</h1>
+<p>There are pleanty of providers for domains, but I used <a href="https://godaddy.com/" target="_blank">godaddy.com</a>.  Once you've puchased the domain you want go ahead and make a new file in your repository root folder called <code>CNAME</code> and write the domain you have just bought in the file.  Example the CNAME file for this site contains simply:</p>
+<pre><code>arrantate.co.uk
+</code></pre>
+<p>Next go to your domain provider's website and look for the DNS settings, on Godaddy this is on your active products page.  You should see a table of records.  Edit the record with Type <code>CNAME</code> and Name <code>www</code>. Change the value to <code>&lt;your github username&gt;.github.io</code>.</p>
+<p>Last step is to add four more records. So click <code>ADD</code> and enter the Type as <code>A</code> and the Name as <code>@</code>.  You are going to want to carry out this step four times, each time entering one of the following into Value:</p>
+<pre><code>185.199.108.153
+185.199.109.153
+185.199.110.153
+185.199.111.153
+</code></pre>
+<p><strong>Note that this is specific to github.io</strong></p>
+<p>Back to github now.  In your repository settings if you scroll down you should see a tick box asking if you want to push https.  It might take a while before you can tick it but once you can go for it.</p>
+<p>If you have any problems at this stage it might be worth visiting the help section linked <a href="https://help.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site" target="_blank">here</a> to look for a solution.</p>
+<p>Cool. we're done. Google Analytics next!</p>
+<h1>Registering the site with <a href="https://analytics.google.com/analytics/web/" target="_blank">Google Analytics</a></h1>
+<p>Another super simple step here.  Create an account with <a href="https://analytics.google.com/analytics/web/" target="_blank">Google Analytics</a>.  Once done, on your dashboard you'll see some code that should be copied into your website's html.  So copy this code and copy it into your <code>template.html</code> directly under the <code>&lt;head&gt;</code> tag.</p>
+<p>Done.</p>
+<h1>Summary</h1>
+<p>If everything has worked you should have a working blog now.  Thanks for taking the time to read, and if you have any comments or suggestions feel free to contact me.  My twitter handle is <a href="http://twitter.com/arrantate" target="_blank">@arrantate</a>.</p>
+<p>This blog post was created on my 5th day of #100daysofcode challenge and will hopefully be the first of many.  I found out about this method of creating a blog <a href="https://vkaustubh.github.io/blog/geek/2020-02-23-blogging-with-flask.html" target="_blank">here</a>.  I encountered a few problems but managed to figure them out using the following documentation and repositories as reference:</p>
+<ul>
+<li><a href="https://flask-flatpages.readthedocs.io/en/v0.7.1/" target="_blank">Flask-FlatPages — Flask-FlatPages 0.7.1 documentation</a></li>
+<li><a href="https://pythonhosted.org/Frozen-Flask/" target="_blank">Frozen-Flask — Frozen-Flask 0.15 documentation</a></li>
+<li><a href="https://github.com/insomnux/flaskblog" target="_blank">insomnux / flaskblog</a></li>
+</ul>
     <span class="author"><strong><a href="">Arran Tate</a></strong> 19 Jun 20</span>
 
         </div>
