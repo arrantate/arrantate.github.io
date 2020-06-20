@@ -1,34 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-169958782-1"></script>
     <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
 
-    gtag('config', 'UA-169958782-1');
+        gtag('config', 'UA-169958782-1');
     </script>
 
-    
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/static/styles/home.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="/static/css/bootstrap.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/static/favicon.ico">
+
     
     <title>Creating a Simple Blog with Flask and FlatPages</title>
     
+
 </head>
+
 <body>
-    <div class="page-title">
-        <a href="/"><h1>arrantate.co.uk</h1></a>
-    </div>
-    <div class="container">
-        
+
+    <div class="mx-auto" style="max-width: 950px; margin: auto;">
+        <nav class="navbar navbar-dark bg-dark">
+            <span class="navbar-text">
+                
+                    Creating a Simple Blog with Flask and FlatPages
+                
+            </span>
+            <a class="navbar-brand" href="/">arrantate.co.uk</a>
             
-        <div class="content">
-            
-    <h1>Creating a Simple Blog with Flask and FlatPages</h1>
+        </nav>
+
+        <div class='container-fluid'>
+            <div>
+                
     <h1>Why flask?</h1>
 <p>To mark the start of this blog I thought it might be a good idea to explain how I got to this point.  I wanted to be able to launch a blog quickly in the most simply way that I could without using any of the usual tools like wordpress of blogger.  After doing some research I came across <code>flask_flatpages</code> and <code>flask_frozen</code> and set to work.</p>
 <p><code>flask_flatpages</code> allows us to write our blog posts in .md files, allowing us to focus on the content rather than html tags, while</p>
@@ -210,9 +220,22 @@ git push origin master
 <li><a href="https://pythonhosted.org/Frozen-Flask/" target="_blank">Frozen-Flask — Frozen-Flask 0.15 documentation</a></li>
 <li><a href="https://github.com/insomnux/flaskblog" target="_blank">insomnux / flaskblog</a></li>
 </ul>
-    <span class="author"><strong><a href="">Arran Tate</a></strong> 19 Jun 20</span>
+    <span><strong><a href="">Arran Tate</a></strong> 19 Jun 20</span>
 
+            </div>
         </div>
     </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="/static/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
 </body>
+
 </html>
