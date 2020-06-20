@@ -41,7 +41,8 @@
                 
     <h1>Why flask?</h1>
 <p>To mark the start of this blog I thought it might be a good idea to explain how I got to this point.  I wanted to be able to launch a blog quickly in the most simple way that I could without using any of the usual tools like wordpress of blogger.  After doing some research I came across <code>flask_flatpages</code> and <code>flask_frozen</code> and set to work.</p>
-<p><code>flask_flatpages</code> allows us to write our blog posts in .md files, allowing us to focus on the content rather than html tags, while</p>
+<p><code>flask_flatpages</code> allows us to write our blog posts in .md files, allowing us to focus on the content rather than html tags, while <code>flask_frozen</code> 'flattens' our website into static <code>.html</code> files which we can upload to any host without and hassle.  Since we use git to update our repository adding a new blog post is as simple as writing out post in a new <code>.md</code> file, freezing the app, and updating the repository.</p>
+<p>The intention of this article is to cover the following:</p>
 <ul>
 <li>Setting up the Flask application</li>
 <li>Using flask_flatpages to generate our blog posts</li>
