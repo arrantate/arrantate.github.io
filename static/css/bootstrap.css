@@ -197,10 +197,8 @@ samp {
 pre {
   margin: 1rem;
   margin-top: 0;
-  padding: 0.5rem;
   overflow: auto;
   -ms-overflow-style: scrollbar;
-  border: 1px solid grey;
 }
 
 figure {

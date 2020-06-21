@@ -120,7 +120,7 @@ author: Me! :)
 description: This is a summary of the post
 
 
-# This is th start of my content!
+# This is the start of my content!
 </code></pre>
 <p>Hopefully that should be it!</p>
 <p>All we are missing now is a home page which contains a list of our blog posts. We will want to display these posts in reverse order by date, so we can see the most recent first.  We do this by using a lambda function, which can be quite tricky to understand so here's a <a href="https://www.w3schools.com/python/python_lambda.asp" target="_blank">link to how it works</a>.  But all we need to know for now is that it does work!  That being said, let's add a new route to the app.</p>
@@ -237,6 +237,11 @@ git push origin master
     <script src="/static/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+
+    <!-- Highlight JS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/atom-one-dark.min.css">
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
 </body>
 
 </html>
