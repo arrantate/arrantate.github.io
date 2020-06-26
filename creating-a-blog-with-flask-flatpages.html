@@ -197,7 +197,7 @@ git push origin master
 <p>The rest of this blog is optional, but for registering a custom domain and setting up Google Analytics, read further.</p>
 <h1>Setting up a costum domain</h1>
 <p>There are pleanty of providers for domains, but I used <a href="https://godaddy.com/" target="_blank">godaddy.com</a>.  Once you've puchased the domain you want go ahead and make a new file in your repository root folder called <code>CNAME</code> and write the domain you have just bought in the file.  Example the CNAME file for this site contains simply:</p>
-<pre><code>arrantate.co.uk
+<pre><code>www.arrantate.co.uk
 </code></pre>
 <p>Next go to your domain provider's website and look for the DNS settings, on Godaddy this is on your active products page.  You should see a table of records.  Edit the record with Type <code>CNAME</code> and Name <code>www</code>. Change the value to <code>&lt;your github username&gt;.github.io</code>.</p>
 <p>Last step is to add four more records. So click <code>ADD</code> and enter the Type as <code>A</code> and the Name as <code>@</code>.  You are going to want to carry out this step four times, each time entering one of the following into Value:</p>
