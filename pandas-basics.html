@@ -153,7 +153,8 @@ df.iloc[[i, j], [k, l]] # Also works with list of rows and columns
 df.sort_index(ascending=False) # Reverse alphabetical order
 </code></pre>
 <p><strong>Again use <code>inplace=True</code> to commit changes to the df</strong></p>
-<h1>Filtering Dataframes</h1>
+<h1 id="filtering-dataframes">Filtering Dataframes</h1>
+
 <p>In the below, the <code>filt</code> variable returns a series with a <code>True</code> or <code>False</code> value for each index.</p>
 <pre><code>filt = (df['email'] == 'arran@email.com')
 </code></pre>
