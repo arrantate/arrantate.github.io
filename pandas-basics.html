@@ -60,13 +60,15 @@
 <pre><code>jupyter notebook
 </code></pre>
 <p>This will open up a web browser with your notebook.</p>
-<h1>Importing the data</h1>
+<h1 id="importing-the-data">Importing the data</h1>
+
 <p>Importing a csv:</p>
 <pre><code>import pandas as pd
 
 df = pd.read_csv('&lt;path to csv&gt;')
 </code></pre>
-<h1>Viewing the data</h1>
+<h1 id="viewing-the-data">Viewing the data</h1>
+
 <p>Shows the first <code>n</code> rows (default is 5):</p>
 <pre><code>df.head(n)
 </code></pre>
@@ -83,7 +85,8 @@ df = pd.read_csv('&lt;path to csv&gt;')
 <pre><code>pd.set_option('display.max_columns', 85)
 pd.set_option('display.max_rows', 85)
 </code></pre>
-<h1>Create a dataframe from a dictionary</h1>
+<h1 id="create-a-dataframe-from-a-dictionary">Create a dataframe from a dictionary</h1>
+
 <p>Example of a dictionary:</p>
 <pre><code>people = {
     "first": ["Arran", "Joe", "Steve"]
@@ -94,7 +97,8 @@ pd.set_option('display.max_rows', 85)
 <p>Creating a dataframe:</p>
 <pre><code>pd.DataFrame(people)
 </code></pre>
-<h1>Series vs Dataframe</h1>
+<h1 id="series-vs-dataframes">Series vs Dataframe</h1>
+
 <p>A series is a list of data (one dimentional array)</p>
 <p>A dataframe is a container for multiple series objects (two dimensional array)</p>
 <p>Returns a series for the 'email' column:</p>
@@ -112,7 +116,8 @@ pd.set_option('display.max_rows', 85)
 <p>Returns the index of columns:</p>
 <pre><code>df.columns
 </code></pre>
-<h1>.iloc (location by integer)</h1>
+<h1 id="iloc-location-by-integer">.iloc (location by integer)</h1>
+
 <p>Returns series of a row by index (i=row) (returned series has an index of column names):</p>
 <pre><code>df.iloc[i]
 </code></pre>
@@ -129,9 +134,11 @@ df.iloc[[i, j], [k, l]] # Also works with list of rows and columns
 <pre><code>df.iloc[0:2, k] # returns indexes from 0 to 2
 </code></pre>
 <p><strong> Note that the slices are inclusive. ie. index 0, 1, and 2 are included.</strong></p>
-<h1>.loc (location by label)</h1>
+<h1 id="loc-location-by-label">.loc (location by label)</h1>
+
 <p>Works the same as iloc but with labels instead of integer index. (if the index happens to be an integer, then the int doesnt not need to be passed as a string)</p>
-<h1>Setting indices</h1>
+<h1 id="setting-indices">Setting indices</h1>
+
 <p>This would return email addresses:</p>
 <pre><code>df.['email']
 </code></pre>

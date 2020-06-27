@@ -53,7 +53,8 @@
 <li><a href="#registering-the-site-with-google-analytics">Registering the site with Google Analytics</a></li>
 <li><a href="#summary">Summary</a></li>
 </ul>
-<h1>Setting up the flask application</h1>
+<h1 id="setting-up-the-flask-application">Setting up the flask application</h1>
+
 <p>As always I start with setting up a new virtual environment for my project</p>
 <pre><code>cd projects
 mkdir blog
@@ -82,7 +83,8 @@ if __name__ == "__main__":
 </code></pre>
 <p>The <code>if __name__ == "__main__":</code> statement is there to allow us to easily run the development server from the console using the command <code>python app.py</code>.  It's not essential but it just makes life easier.  And since we are going to be generating a static site using this flask app, we dont need to worry about having debug set to true as we will not be deplying the flask app it's self.</p>
 <p>So to test that this works just start up the development server with <code>python run.py</code> and open the url that is given to us in the console, something like <code>http://127.0.0.1:5000/</code>. We should see a blank webpage with just the words "Hello, World!" at the top.  If we do, everything worked and we have a working flask app.  But it doesn't do much yet, so let's get to the meaty bits.</p>
-<h1>Using flask_flatpages to generate our blog posts</h1>
+<h1 id="using-flaskflatpages-to-generate-our-blog-posts">Using flask_flatpages to generate our blog posts</h1>
+
 <p>Writing out posts is going to be a lot easier if we write each blog post in a .md file. The job of <code>flask_flatpages</code> is to take these <code>.md</code> files and essentially tell flask to serve them in the browser as <code>.html</code>.  </p>
 <p>To start we need to tell <code>flask_flatpages</code> to look for files with the extension <code>.md</code>.  By default it will look for these in <code>/pages/</code> directory. We're okay with that so we will leave it as is.  However also by default it will be looking for <code>.html</code> files instead of <code>.md</code>.  So let's add some configuration and instantiate a <code>FlatPages()</code> class, passing in our <code>app</code> instance.  (also don't forget to import Flatpages).  </p>
 <pre><code>from flask import Flask, render_template, url_for
@@ -144,7 +146,8 @@ def index():
 {% endblock %}
 </code></pre>
 <p>Simple as that.  You should now be able to navigate from your blog homepage to the blog posts.  If you want to add a link back to the homepage make sure you add it in <code>template.html</code> so it appears in all of your pages.</p>
-<h1>Using flask_frozen to generate static html files</h1>
+<h1 id="using-flaskfrozen-to-generate-static-html-files">Using flask_frozen to generate static html files</h1>
+
 <p>The hard stuff is out of the way now, all this next part does is to freeze our website to <code>.html</code> files, making it much easier to deploy.  In the interest of simplicity we'll impliment this functionality in a new file, <code>freeze.py</code> with the following code:</p>
 <pre><code>from flask_frozen import Freezer
 from flask import url_for
@@ -169,13 +172,15 @@ if __name__ == "__main__":
 </code></pre>
 <p>Simple! Now we should have all of our required files in the <code>/build/</code> directory.</p>
 <p>It is important to note though that if you open the newly created files in the browser the links back to the root won't work properly.  But that is because they are doing just that, linking to <code>/</code>.  Once these files are uploaded to the root folder of your host (i am using <a href="https://github.io/" target="_blank">github.io</a>) the links should work corrently.</p>
-<h1>Hosting on github.io</h1>
+<h1 id="hosting-on-githubio">Hosting on github.io</h1>
+
 <p>This is super simple.  If you don't have a github account create one, and make a new repository.  Name your repository the following:</p>
 <pre><code>&lt;your github username&gt;.github.io
 </code></pre>
 <p>make sure you don't include the <code>README.md</code>. We want our webpage to load first instead of this.</p>
 <p>That's it!  Nothing more to say.</p>
-<h1>Deploying using git</h1>
+<h1 id="deploying-using-git">Deploying using git</h1>
+
 <p>Again, another super simple step.  I won't teach people how to suck eggs so here are the commands I used to add the files to my github repo.</p>
 <pre><code>cd &lt;build directory&gt;
 git init
@@ -196,7 +201,8 @@ git push origin master
 </code></pre>
 <p>One day we could work on automating this step but for now we have the functionality!</p>
 <p>The rest of this blog is optional, but for registering a custom domain and setting up Google Analytics, read further.</p>
-<h1>Setting up a custom domain</h1>
+<h1 id="setting-up-a-custom-domain">Setting up a custom domain</h1>
+
 <p>There are pleanty of providers for domains, but I used <a href="https://godaddy.com/" target="_blank">godaddy.com</a>.  Once you've puchased the domain you want go ahead and make a new file in your repository root folder called <code>CNAME</code> and write the domain you have just bought in the file.  Example the CNAME file for this site contains simply:</p>
 <pre><code>www.arrantate.co.uk
 </code></pre>
@@ -211,10 +217,12 @@ git push origin master
 <p>Back to github now.  In your repository settings if you scroll down you should see a tick box asking if you want to push https.  It might take a while before you can tick it but once you can go for it.</p>
 <p>If you have any problems at this stage it might be worth visiting the help section linked <a href="https://help.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site" target="_blank">here</a> to look for a solution.</p>
 <p>Cool. we're done. Google Analytics next!</p>
-<h1>Registering the site with Google Analytics</h1>
+<h1 id="registering-the-site-with-google-analytics">Registering the site with Google Analytics</h1>
+
 <p>Another super simple step here.  Create an account with <a href="https://analytics.google.com/analytics/web/" target="_blank">Google Analytics</a>.  Once done, on your dashboard you'll see some code that should be copied into your website's html.  So copy this code and copy it into your <code>template.html</code> directly under the <code>&lt;head&gt;</code> tag.</p>
 <p>Done.</p>
-<h1>Summary</h1>
+<h1 id="summary">Summary</h1>
+
 <p>If everything has worked you should have a working blog now.  Thanks for taking the time to read, and if you have any comments or suggestions feel free to contact me.  My twitter handle is <a href="http://twitter.com/arrantate" target="_blank">@arrantate</a>.</p>
 <p>This blog post was created on my 5th day of #100daysofcode challenge and will hopefully be the first of many.  I found out about this method of creating a blog <a href="https://vkaustubh.github.io/blog/geek/2020-02-23-blogging-with-flask.html" target="_blank">here</a>.  I encountered a few problems but managed to figure them out using the following documentation and repositories as reference:</p>
 <ul>
