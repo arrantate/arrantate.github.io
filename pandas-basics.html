@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="/static/favicon.ico">
 
     
-    <title>Arran Tate</title>
+    <title>Reference for pandas library</title>
     
 
 </head>
@@ -29,7 +29,7 @@
         <nav class="navbar navbar-dark bg-dark">
             <span class="navbar-text">
                 
-                    Home
+                    Reference for pandas library
                 
             </span>
             <a class="navbar-brand" href="/">arrantate.co.uk</a>
@@ -39,27 +39,32 @@
         <div class='container-fluid'>
             <div>
                 
-    <p class="font-weight-bold text-center">There aren't many articles here yet, but I'm working on it!  In the mean time you can find me on <a href="twitter.com/arrantate" target="_blank">Twitter</a>. I'll be working on new content for this website as often as I can. If you find any errors or something I can improve on then let me know!</p>
-    
-    
-    <hr>
-    
-    <a href="pandas-basics.html"><h2>Reference for pandas library</h2></a>
-    <h6>This post consists of my notes on pandas and how to use it. It will be updated as I learn more. Let me know if you find it useful.</h6>
-    <code>27 Jun 20</code>
-    
-    <hr>
-    
-    <a href="syntax-highlighting-with-highlight-js.html"><h2>Syntax highlighting code blocks with highlight.js</h2></a>
-    <h6>By implementing a script called `highlight.js` we can style any code blocks within our website to display syntax for many languages.  This post intends to show the easiest way to get up and running with a theme that you like.</h6>
-    <code>21 Jun 20</code>
-    
-    <hr>
-    
-    <a href="creating-a-blog-with-flask-flatpages.html"><h2>Creating a Simple Blog with Flask and FlatPages</h2></a>
-    <h6>To mark the start of this blog I thought it might be a good idea to explain how I got to this point.  I wanted to be able to launch a blog quickly in the most simple way that I could without using any of the usual tools like wordpress of blogger.  After doing some research I came across `flask_flatpages` and `flask_frozen` and set to work...</h6>
-    <code>19 Jun 20</code>
-    
+    <h1>Jupyter</h1>
+<p>Pandas is easy to use in a jupyter notebook since the data is easily viewable</p>
+<h1>Importing the data</h1>
+<p>Importing a csv:</p>
+<pre><code>import pandas as pd
+
+df = pd.read_csv('&lt;path to csv&gt;')
+</code></pre>
+<h1>Viewing the data</h1>
+<p>Shows the first <code>n</code> rows (default is 5):</p>
+<pre><code>df.head(n)
+</code></pre>
+<p>Shows the last <code>n</code> rows (default is 5):</p>
+<pre><code>df.tail(n)
+</code></pre>
+<p>Returns a tuple showing dimensions of the dataframe (rows, cols):</p>
+<pre><code>df.shape
+</code></pre>
+<p>Shows the type of data in each column:</p>
+<pre><code>df.info()
+</code></pre>
+<p>Tells pandas how many rows and colums to show:</p>
+<pre><code>pd.set_option('display.max_columns', 85)
+pd.set_option('display.max_rows', 85)
+</code></pre>
+    <span><strong><a href="">Arran Tate</a></strong> 27 Jun 20</span>
 
             </div>
         </div>
