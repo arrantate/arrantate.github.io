@@ -41,6 +41,18 @@
                 
     <h1>Intro</h1>
 <p>The content of this page are my notes from Corey Schafer's youtube series 'Python Pandas Tutorial'</p>
+<p>Topics covered:</p>
+<ul>
+<li><a href="#jupyter">Jupyter</a></li>
+<li><a href="#importing-the-data]">Importing the data</a></li>
+<li><a href="#viewing-the-data">Viewing the data</a></li>
+<li><a href="#create-a-dataframe-from-a-dictionary">Create a dataframe from a dictionary</a></li>
+<li><a href="#series-vs-dataframe">Series vs Dataframe</a></li>
+<li><a href="#iloc-location-by-integer">.iloc (location by integer)</a></li>
+<li><a href="#loc-location-by-label">.loc (location by label)</a></li>
+<li><a href="#setting-indices">Setting indices</a></li>
+<li><a href="#filtering-dataframes">Filtering Dataframes</a></li>
+</ul>
 <h1>Jupyter</h1>
 <p>Pandas is easy to use in a jupyter notebook since the data is easily viewable.</p>
 <p>Launch a notebook:</p>
@@ -118,6 +130,47 @@ df.iloc[[i, j], [k, l]] # Also works with list of rows and columns
 <p><strong> Note that the slices are inclusive. ie. index 0, 1, and 2 are included.</strong></p>
 <h1>.loc (location by label)</h1>
 <p>Works the same as iloc but with labels instead of integer index. (if the index happens to be an integer, then the int doesnt not need to be passed as a string)</p>
+<h1>Setting indices</h1>
+<p>This would return email addresses:</p>
+<pre><code>df.['email']
+</code></pre>
+<p>This returns the index of the dataframe:</p>
+<pre><code>df.index
+</code></pre>
+<p>This would set the email address as the index:</p>
+<pre><code>df.set_index('email')
+</code></pre>
+<p><strong>Note: this will not change the df.  It will just return a version of the df with the altered index.  to change the df you would <code>df.set_index('email', inplace=True)</code></strong></p>
+<p>This will reset the index:</p>
+<pre><code>df.reset_index(inplace=True)
+</code></pre>
+<p>The index can also be set when you create the dataframe:</p>
+<pre><code>df = pd.read_csv('&lt;path to csv&gt;', index_col='email')
+</code></pre>
+<p>Order df by index (alphabetical):</p>
+<pre><code>df.sort_index() 
+df.sort_index(ascending=False) # Reverse alphabetical order
+</code></pre>
+<p><strong>Again use <code>inplace=True</code> to commit changes to the df</strong></p>
+<h1>Filtering Dataframes</h1>
+<p>In the below, the <code>filt</code> variable returns a series with a <code>True</code> or <code>False</code> value for each index.</p>
+<pre><code>filt = (df['email'] == 'arran@email.com')
+</code></pre>
+<p>This applies the filter (which we defined above) to the <code>df</code> and returns a <code>df</code> containing all rows that returned <code>True</code> from the filter:</p>
+<pre><code>df[filt]
+</code></pre>
+<p>To put it simply. To filter the <code>df</code> for a given email address and return the resulting <code>df</code> we would have:</p>
+<pre><code>filt = (df['email'] == 'arran@email.com')
+df[filt]
+</code></pre>
+<p><strong>Can also be written on one line: <code>df[df['email'] == 'arran@email.com']</code></strong></p>
+<p>Can also be acheived using <code>.loc</code> using <code>filt</code> as the rows argument, allowing us to also choose which columns we want:</p>
+<pre><code>df.loc[filt, 'first']
+df.loc[~filt, 'first'] # adding the ~ reverses the filter
+</code></pre>
+<p><strong>Conditionals:</strong> <code>&amp;</code> means "and" and <code>|</code> means "or". Used like:</p>
+<pre><code>filt = (df['email'] == 'arran@email.com') &amp; (df['first'] == 'arran')
+</code></pre>
     <span><strong><a href="">Arran Tate</a></strong> 27 Jun 20</span>
 
             </div>

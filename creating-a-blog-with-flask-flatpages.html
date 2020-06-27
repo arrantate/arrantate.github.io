@@ -44,13 +44,14 @@
 <p><code>flask_flatpages</code> allows us to write our blog posts in .md files, allowing us to focus on the content rather than html tags, while <code>flask_frozen</code> 'flattens' our website into static <code>.html</code> files which we can upload to any host without and hassle.  Since we use git to update our repository adding a new blog post is as simple as writing out post in a new <code>.md</code> file, freezing the app, and updating the repository.</p>
 <p>The intention of this article is to cover the following:</p>
 <ul>
-<li>Setting up the Flask application</li>
-<li>Using flask_flatpages to generate our blog posts</li>
-<li>Using flask_frozen to generate static html files</li>
-<li>Hosting on <a href="https://github.io/" target="_blank">github.io</a></li>
-<li>Deploying using git</li>
-<li>Setting up a custom domain</li>
-<li>Registering the site with <a href="https://analytics.google.com/analytics/web/" target="_blank">Google Analytics</a></li>
+<li><a href="#setting-up-the-flask-application">Setting up the flask application</a></li>
+<li><a href="#using-flaskflatpages-to-generate-our-blog-posts">Using flask_flatpages to generate our blog posts</a></li>
+<li><a href="#using-flaskfrozen-to-generate-static-html-files">Using flask_frozen to generate static html files</a></li>
+<li><a href="#hosting-on-githubio">Hosting on github.io</a></li>
+<li><a href="#deploying-using-git">Deploying using git</a></li>
+<li><a href="#setting-up-a-custom-domain">Setting up a custom domain</a></li>
+<li><a href="#registering-the-site-with-google-analytics">Registering the site with Google Analytics</a></li>
+<li><a href="#summary">Summary</a></li>
 </ul>
 <h1>Setting up the flask application</h1>
 <p>As always I start with setting up a new virtual environment for my project</p>
@@ -195,7 +196,7 @@ git push origin master
 </code></pre>
 <p>One day we could work on automating this step but for now we have the functionality!</p>
 <p>The rest of this blog is optional, but for registering a custom domain and setting up Google Analytics, read further.</p>
-<h1>Setting up a costum domain</h1>
+<h1>Setting up a custom domain</h1>
 <p>There are pleanty of providers for domains, but I used <a href="https://godaddy.com/" target="_blank">godaddy.com</a>.  Once you've puchased the domain you want go ahead and make a new file in your repository root folder called <code>CNAME</code> and write the domain you have just bought in the file.  Example the CNAME file for this site contains simply:</p>
 <pre><code>www.arrantate.co.uk
 </code></pre>
@@ -210,7 +211,7 @@ git push origin master
 <p>Back to github now.  In your repository settings if you scroll down you should see a tick box asking if you want to push https.  It might take a while before you can tick it but once you can go for it.</p>
 <p>If you have any problems at this stage it might be worth visiting the help section linked <a href="https://help.github.com/en/github/working-with-github-pages/configuring-a-custom-domain-for-your-github-pages-site" target="_blank">here</a> to look for a solution.</p>
 <p>Cool. we're done. Google Analytics next!</p>
-<h1>Registering the site with <a href="https://analytics.google.com/analytics/web/" target="_blank">Google Analytics</a></h1>
+<h1>Registering the site with Google Analytics</h1>
 <p>Another super simple step here.  Create an account with <a href="https://analytics.google.com/analytics/web/" target="_blank">Google Analytics</a>.  Once done, on your dashboard you'll see some code that should be copied into your website's html.  So copy this code and copy it into your <code>template.html</code> directly under the <code>&lt;head&gt;</code> tag.</p>
 <p>Done.</p>
 <h1>Summary</h1>
