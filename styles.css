@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&family=Paytone+One&display=swap");
+body {
+  background-color: #101820;
+  color: #b5b4b0;
+  font-family: "Nunito", sans-serif;
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: #b5b4b0;
+}
+
+footer {
+  margin-bottom: 5rem;
+  text-align: right;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+.hero {
+  background-color: #f5f5f5;
+  color: #5c5b57;
+  text-align: center;
+  padding: 1rem 0;
+  margin: 2rem 0;
+}
+.hero i {
+  margin: 1rem 2rem;
+}
+.hero i:hover {
+  color: rgba(92, 91, 87, 0.85);
+}
+
+.project {
+  padding: 1rem;
+  margin: 1rem 0;
+  background-color: #15202a;
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.highlight {
+  color: #00b35c;
+}
+
+#social {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  text-align: center;
+  background-color: #101820;
+}
+#social a {
+  color: #00b35c;
+  text-decoration: none;
+  margin: 0 1.5rem;
+}
+
+/*# sourceMappingURL=styles.css.map */
