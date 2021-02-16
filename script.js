@@ -23,8 +23,7 @@ setInterval(blink, blinkInterval)
 
 
 // Make sections drop down on arrow click
-const arrows = document.querySelectorAll('.arrow')
-arrows.forEach(arrow => {
+document.querySelectorAll('.arrow').forEach(arrow => {
     let arrowActive = true
     arrow.onclick = () => {
         console.log(arrow.dataset.class)
