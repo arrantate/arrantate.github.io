@@ -84,6 +84,21 @@ a:hover {
 }
 
 
+.arrow {
+    font-size: 1rem;
+    margin-left: 1rem;
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+
+.rotate-90 {
+    transform: rotate(-90deg);
+}
+
+
 #social {
     position:fixed;
     left: 0px;
@@ -101,10 +116,11 @@ a:hover {
     }
 }
 
-#github {
+.github {
     font-family: 'Major Mono Display', monospace;
     background-color: $background-color-light;
     color: $text-color-light;
+    margin: 1rem 0;
     padding: 1rem;
     border: 1px solid black;
     border-radius: 5px;
