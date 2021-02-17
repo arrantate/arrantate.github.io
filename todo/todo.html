@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arrantate.co.uk - JavaScript Todo List</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <!-- End Bootstrap CSS -->
+
+    <!-- Font Awesome -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+    </noscript>
+    <!-- End Font Awesome -->
+
+</head>
+
+<body>
+    <div class="container">
+
+        <div class="my-4 text-center">
+            <a href="../index.html">arrantate.co.uk</a><br>
+            <h1>Do The Thing</h1>
+            <span class="badge badge-secondary text-center">HTML 5</span>
+            <span class="badge badge-secondary">JavaScript</span>
+            <span class="badge badge-secondary">Bootstrap 4</span>
+            <br>
+        </div>
+
+        <div class="text-center mx-auto" style="max-width: 300px;">
+
+            <form id="new-todo">
+                <input id="todo-text" type="text" class="form-control" placeholder="New thing..." autocomplete="off">
+            </form>
+
+            <ul id="todo-list" class="list-group">
+
+            </ul>
+        </div>
+
+
+    </div>
+
+    <script src="todo.js"></script>
+</body>
+
+</html>
