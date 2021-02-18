@@ -27,14 +27,11 @@ function loadTodos() {
 // Add new todo
 function addTodo(event) {
     event.preventDefault()
-
     const todoLi = document.createElement("Li")
     todoLi.classList = "list-group-item text-left"
     todoLi.innerHTML = todoText.value
     todoList.appendChild(todoLi)
-
     saveTodo(todoText.value)
-
     todoText.value = ''
 }
 
