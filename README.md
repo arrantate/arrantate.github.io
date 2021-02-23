@@ -7,3 +7,10 @@ Alogn with the landing page, some simple vanilla javascript pages will also be h
 ---
 
 To contact me, send me a message here, on [twitter](https://twitter.com/arrantate) or at arranmt@gmail.com
+
+---
+---
+
+# Todo App
+
+the first of the aditional app pages is the todo list.  It is still under construction and therefore does not have the ability to remove completed items from the list yet.
