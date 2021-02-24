@@ -51,13 +51,17 @@ function addTodo(event) {
     todoText.value = ''
 }
 
-// Delete Todo
+// Delete Todo (also deltes any duplicates)
 function deleteTodo() {
+    // remove from DOM
     const todoText = this.parentElement.querySelector('p').innerText
     const todoListElements = [...document.querySelectorAll(".todoListItem")]
     todoListElements.filter(element => element.querySelector('p').innerText === todoText)
         .forEach(element => element.remove())
-    removeTodo(todoText)
+    // remove from local storage
+    const todos = JSON.parse(localStorage.getItem("todos"))
+    const newTodos = todos.filter(todo => todo != todoText)
+    localStorage.setItem("todos", JSON.stringify(newTodos))
 }
 
 // Save input to local storage todos
@@ -65,11 +69,4 @@ function saveTodo(todo) {
     let todos = JSON.parse(localStorage.getItem("todos"))
     todos.push(todo)
     localStorage.setItem("todos", JSON.stringify(todos))
-}
-
-// Remove input from local storage todos
-function removeTodo(toRemove) {
-    const todos = JSON.parse(localStorage.getItem("todos"))
-    const newTodos = todos.filter(todo => todo != toRemove)
-    localStorage.setItem("todos", JSON.stringify(newTodos))
 }
