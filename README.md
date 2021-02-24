@@ -13,4 +13,7 @@ To contact me, send me a message here, on [twitter](https://twitter.com/arrantat
 
 # [Todo App](https://www.arrantate.co.uk/todo/todo.html)
 
-the first of the aditional app pages is the todo list.  It is still under construction and therefore does not have the ability to remove completed items from the list yet.
+the first of the aditional app pages is the todo list.  
+
+Things to fix:
+- When a single entry of a duplicate item is deleted, it removes all duplications from local storage but this is not reflected in the DOM until the page refreshes
