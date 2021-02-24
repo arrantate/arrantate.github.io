@@ -15,5 +15,5 @@ To contact me, send me a message here, on [twitter](https://twitter.com/arrantat
 
 the first of the aditional app pages is the todo list.  
 
-Things to fix:
-- When a single entry of a duplicate item is deleted, it removes all duplications from local storage but this is not reflected in the DOM until the page refreshes
+Things to note:
+- Duplicates are removed on deletion of one list item
