@@ -12,7 +12,7 @@ form.addEventListener("submit", addTodo)
 // Create todo List Element
 function newListItem(todo) {
     const todoLi = document.createElement("Li")
-    todoLi.classList = "d-flex"
+    todoLi.classList = "d-flex todoListItem"
     todoList.appendChild(todoLi)
 
     const todoText = document.createElement('p')
@@ -53,10 +53,10 @@ function addTodo(event) {
 
 // Delete Todo
 function deleteTodo() {
-    const todoListItem = this.parentElement
-    const todoText = todoListItem.querySelector('p').innerText
-    todoListItem.remove()
-    console.log(`delete ${todoText}`)
+    const todoText = this.parentElement.querySelector('p').innerText
+    const todoListElements = [...document.querySelectorAll(".todoListItem")]
+    todoListElements.filter(element => element.querySelector('p').innerText === todoText)
+        .forEach(element => element.remove())
     removeTodo(todoText)
 }
 
@@ -64,15 +64,12 @@ function deleteTodo() {
 function saveTodo(todo) {
     let todos = JSON.parse(localStorage.getItem("todos"))
     todos.push(todo)
-    console.log(todos)
     localStorage.setItem("todos", JSON.stringify(todos))
 }
 
 // Remove input from local storage todos
 function removeTodo(toRemove) {
     const todos = JSON.parse(localStorage.getItem("todos"))
-    console.log(todos)
     const newTodos = todos.filter(todo => todo != toRemove)
-    console.log(newTodos)
     localStorage.setItem("todos", JSON.stringify(newTodos))
 }
